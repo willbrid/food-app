@@ -1,25 +1,16 @@
 import React, { useContext } from "react";
-import styled from "styled-components/native";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
-import { SvgXml } from "react-native-svg";
 
+import Text from "../../../components/typography/text.component";
 import Spacer from "../../../components/spacer/spacer.component";
+
+import { SectionEnd, Open } from './restaurant-info-card.styles';
 
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
 import { ThemeContext } from "../../../providers/theme/theme.provider";
-
-const SectionEnd = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const Open = styled(SvgXml)`
-  flex-direction: row;
-`;
 
 const RestaurantInfoCard = ({ restaurant = {} }) => {
   const theme = useContext(ThemeContext);
@@ -42,16 +33,16 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
     <Card elevation={5} style={styles(theme).restaurantCard}>
       <Card.Cover key={name} source={{ uri: photos[0] }} style={styles(theme).restaurantCardCover} />
       <View style={styles(theme).info}>
-        <Text style={styles(theme).title}>{name}</Text>
+        <Text variant="label">{name}</Text>
         <View style={styles(theme).section}>
           <View style={styles(theme).rating}>
             {ratingArray.map((item, index) => (
-              <SvgXml key={index} xml={star} width={20} height={20} />
+              <Open key={index} xml={star} width={20} height={20} />
             ))}
           </View>
           <SectionEnd>
             {isClosedTemporarily && (
-              <Text variant="label" style={{ color: "red" }}>
+              <Text variant="error">
                 CLOSED TEMPORARILY
               </Text>
             )}
