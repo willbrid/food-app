@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { Text, Image } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 
@@ -9,40 +9,7 @@ import Spacer from "../../../components/spacer/spacer.component";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
-const RestaurantCard = styled(Card)`
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-
-const RestaurantCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[3]};
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-
-const Address = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.caption};
-`;
-
-const Title = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.body};
-  color: ${(props) => props.theme.colors.ui.primary};
-`;
-
-const Info = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-const Rating = styled.View`
-  flex-direction: row;
-  padding-top: ${(props) => props.theme.space[2]};
-  padding-bottom: ${(props) => props.theme.space[2]};
-`;
-
-const Section = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
+import { ThemeContext } from "../../../providers/theme/theme.provider";
 
 const SectionEnd = styled.View`
   flex: 1;
@@ -55,6 +22,8 @@ const Open = styled(SvgXml)`
 `;
 
 const RestaurantInfoCard = ({ restaurant = {} }) => {
+  const theme = useContext(ThemeContext);
+
   const {
     name = "Some restaurant",
     icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
@@ -70,35 +39,65 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <RestaurantCard elevation={5}>
-      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
-      <Info>
-        <Title>{name}</Title>
-        <Section>
-          <Rating>
+    <Card elevation={5} style={styles(theme).restaurantCard}>
+      <Card.Cover key={name} source={{ uri: photos[0] }} style={styles(theme).restaurantCardCover} />
+      <View style={styles(theme).info}>
+        <Text style={styles(theme).title}>{name}</Text>
+        <View style={styles(theme).section}>
+          <View style={styles(theme).rating}>
             {ratingArray.map((item, index) => (
               <SvgXml key={index} xml={star} width={20} height={20} />
             ))}
-          </Rating>
+          </View>
           <SectionEnd>
             {isClosedTemporarily && (
-              // eslint-disable-next-line react-native/no-inline-styles
               <Text variant="label" style={{ color: "red" }}>
                 CLOSED TEMPORARILY
               </Text>
             )}
             <Spacer position="left" size="large">
               {isOpenNow === true && <Open xml={open} width={20} height={20} />}
-            </Spacer>
+            </Spacer> 
             <Spacer position="left" size="large">
               <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
             </Spacer>
           </SectionEnd>
-        </Section>
-        <Address>{address}</Address>
-      </Info>
-    </RestaurantCard>
+        </View>
+        <Text style={styles(theme).address}>{address}</Text>
+      </View> 
+    </Card>
   );
 };
+
+const styles = (theme) => StyleSheet.create({
+  restaurantCard: {
+    backgroundColor: theme?.colors.bg.primary
+  },
+  restaurantCardCover: {
+    padding: theme?.space[3],
+    backgroundColor: theme?.colors.bg.primary,
+  },
+  address: {
+    fontFamily: theme?.fonts.body,
+    fontSize: theme?.fontSizes.caption,
+  },
+  title: {
+    fontFamily: theme?.fonts.heading,
+    fontSize: theme?.fontSizes.body,
+    color: theme?.colors.ui.primary,
+  },
+  info: {
+    padding: theme?.space[3]
+  },
+  rating: {
+    flexDirection: "row",
+    paddingTop: theme?.space[2],
+    paddingBottom: theme?.space[2]
+  },
+  section: {
+    flexDirection: "row",
+    alignItems: "center"
+  }
+});
 
 export default RestaurantInfoCard;
