@@ -24,10 +24,10 @@ const getVariant = (position, size, theme) => {
   return {[property]: value};
 };
 
-const Spacer = ({ position, size }) => {
+const Spacer = ({ position, size, children }) => {
   const theme = useContext(ThemeContext);
 
-  return <View style={getVariant(position, size, theme)} />
+  return <View style={getVariant(position, size, theme)}>{children}</View>
 }
 
 Spacer.defaultProps = {
