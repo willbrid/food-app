@@ -1,18 +1,12 @@
 import React, { useContext } from "react";
-import { View, SafeAreaView, StatusBar, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
-import styled from "styled-components/native";
 
 import { ThemeContext } from "../../../providers/theme/theme.provider";
 
 import RestaurantInfoCard from "../components/restaurant-info-card.component";
 import Spacer from "../../../components/spacer/spacer.component";
-
-// Compartibilité entre andoird et ios pour StatusBar.currentHeight
-const SafeArea = styled(SafeAreaView)`
-  flex: 1;
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px;`}
-`;
+import SafeArea from "../../../components/utility/safe-area.component";
 
 const data = [
   { name: 1 },

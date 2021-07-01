@@ -1,12 +1,13 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
+import 'expo-font';
 import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
-import RestaurantsScreen from "./src/features/restaurants/screens/restaurants.screen";
+import Navigation from "./src/infrastructure/navigation";
 
 import ThemeProvider from "./src/providers/theme/theme.provider";
 
@@ -26,7 +27,7 @@ const App = () => {
   return (
     <>
       <ThemeProvider>
-        <RestaurantsScreen />
+        <Navigation />
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
