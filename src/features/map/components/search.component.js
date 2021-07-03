@@ -32,7 +32,11 @@ const Search = () => {
 
 const styles = (theme) => StyleSheet.create({
     searchContainer: {
-      padding: theme?.space[3]
+      padding: theme?.space[3],
+      position: 'absolute',
+      zIndex: 999,
+      top: 30,
+      width: "100%"
     },
 });
 
