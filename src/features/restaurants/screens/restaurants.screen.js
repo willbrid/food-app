@@ -16,12 +16,12 @@ const RestaurantsScreen = ({ navigation }) => {
   const theme = useContext(ThemeContext);
   const { isLoading, error, restaurants } = useContext(RestaurantsContext);
 
-  const handlePress = () => {
-    navigation.navigate(routes.restaurantDetail);
+  const handlePress = (item) => {
+    navigation.navigate(routes.restaurantDetail, { restaurant: item });
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity onPress={() => handlePress(item)}>
       <RestaurantInfoCard restaurant={item} />
     </TouchableOpacity>
   );
