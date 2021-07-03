@@ -15,7 +15,7 @@ export const RestaurantsContextProvider = ({ children }) => {
     const retreiveRestaurants = (loc) => {
         setIsLoading(true);
         setRestaurants([]);
-        
+
         setTimeout(() => {
             restaurantsRequest(loc)
             .then(restaurantsTransform)
@@ -34,7 +34,7 @@ export const RestaurantsContextProvider = ({ children }) => {
             const locationString = `${location.lat},${location.lng}`;
             retreiveRestaurants(locationString);
         }
-    }, []);
+    }, [location]);
 
     return (
         <RestaurantsContext.Provider value={{
