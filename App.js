@@ -11,6 +11,7 @@ import Navigation from "./src/infrastructure/navigation";
 
 import ThemeProvider from "./src/providers/theme/theme.provider";
 import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
+import { LocationContextProvider } from './src/services/location/location.context';
 
 const App = () => {
   const [oswaldLoaded] = useOswald({
@@ -28,9 +29,11 @@ const App = () => {
   return (
     <>
       <ThemeProvider>
-        <RestaurantsContextProvider>
-          <Navigation />
-        </RestaurantsContextProvider>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Navigation />
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
