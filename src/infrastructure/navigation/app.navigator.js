@@ -2,9 +2,11 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
 
-import RestaurantsScreen from '../../features/restaurants/screens/restaurants.screen';
+import RestaurantsNavigator from './restaurants.navigator';
 import MapScreen from '../../features/map/screens/map.screen';
 import SettingsScreen from '../../features/settings/screens/settings.screen';
+
+import routes from './routes';
 
 const TAB_ICON = {
     Restaurants: "md-restaurant",
@@ -28,9 +30,9 @@ const AppNavigator = () => (
     <Tab.Navigator
         screenOptions={screenOptions}
     >
-        <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name={routes.restaurants} component={RestaurantsNavigator} />
+        <Tab.Screen name={routes.mapView} component={MapScreen} />
+        <Tab.Screen name={routes.settings} component={SettingsScreen} />
     </Tab.Navigator>
 );
 
