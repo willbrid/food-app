@@ -4,6 +4,7 @@ import { Card } from "react-native-paper";
 
 import Text from "../../../components/typography/text.component";
 import Spacer from "../../../components/spacer/spacer.component";
+import Favourite from "../../../components/favourite/favourite.component";
 
 import { SectionEnd, Open } from './restaurant-info-card.styles';
 
@@ -31,6 +32,7 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <Card elevation={5} style={styles(theme).restaurantCard}>
+      <Favourite restaurant={restaurant} />
       <Card.Cover key={name} source={{ uri: photos[0] }} style={styles(theme).restaurantCardCover} />
       <View style={styles(theme).info}>
         <Text variant="label">{name}</Text>

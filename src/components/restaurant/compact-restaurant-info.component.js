@@ -5,11 +5,11 @@ import Text from '../typography/text.component';
 
 const isAndroid = Platform.OS === "android";
 
-const CompactRestaurantInfo = ({ restaurant }) => {
+const CompactRestaurantInfo = ({ restaurant, isMap = false }) => {
     return (
         <View style={styles.item}>
             {
-                isAndroid
+                isAndroid && isMap
                 ?
                 <WebView 
                     style={styles.image} 
