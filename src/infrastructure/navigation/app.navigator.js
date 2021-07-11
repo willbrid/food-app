@@ -8,7 +8,7 @@ import { FavouritesContextProvider } from '../../services/favourites/favourites.
 
 import RestaurantsNavigator from './restaurants.navigator';
 import MapScreen from '../../features/map/screens/map.screen';
-import SettingsScreen from '../../features/settings/screens/settings.screen';
+import SettingsNavigator from "./settings.navigator";
 
 import routes from './routes';
 
@@ -39,7 +39,7 @@ const AppNavigator = () => (
                 >
                     <Tab.Screen name={routes.restaurants} component={RestaurantsNavigator} />
                     <Tab.Screen name={routes.mapView} component={MapScreen} />
-                    <Tab.Screen name={routes.settings} component={SettingsScreen} />
+                    <Tab.Screen name={routes.settings} component={SettingsNavigator} />
                 </Tab.Navigator>
             </RestaurantsContextProvider>
         </LocationContextProvider>
