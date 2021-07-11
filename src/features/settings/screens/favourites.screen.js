@@ -5,6 +5,7 @@ import Spacer from '../../../components/spacer/spacer.component';
 import Text from '../../../components/typography/text.component';
 import SafeArea from '../../../components/utility/safe-area.component';
 import RestaurantInfoCard from '../../restaurants/components/restaurant-info-card.component';
+import FadeInView from '../../../components/animations/fade.animation';
 
 import { ThemeContext } from '../../../providers/theme/theme.provider';
 import { FavouritesContext } from '../../../services/favourites/favourites.context';
@@ -21,7 +22,9 @@ const FavouritesScreen = ({ navigation }) => {
 
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => handlePress(item)}>
-          <RestaurantInfoCard restaurant={item} />
+            <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+            </FadeInView>
         </TouchableOpacity>
     );
 

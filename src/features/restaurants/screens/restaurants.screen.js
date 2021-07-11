@@ -11,6 +11,7 @@ import SafeArea from "../../../components/utility/safe-area.component";
 import Loading from '../../../components/loading/loading.component';
 import Search from '../components/search.component';
 import FavouriteBar from '../../../components/favourite/favourite-bar.component';
+import FadeInView from "../../../components/animations/fade.animation";
 
 import routes from '../../../infrastructure/navigation/routes';
 
@@ -26,7 +27,9 @@ const RestaurantsScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handlePress(item)}>
-      <RestaurantInfoCard restaurant={item} />
+      <FadeInView>
+        <RestaurantInfoCard restaurant={item} />
+      </FadeInView>
     </TouchableOpacity>
   );
 
