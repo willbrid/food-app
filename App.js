@@ -15,18 +15,18 @@ import { LocationContextProvider } from './src/services/location/location.contex
 import { FavouritesContextProvider } from './src/services/favourites/favourites.context';
 
 const App = () => {
-  const [oswaldLoaded] = useOswald({
+  const [oswaldLoaded, error1] = useOswald({
     Oswald_400Regular,
   });
 
-  const [latoLoaded] = useLato({
+  const [latoLoaded, error2] = useLato({
     Lato_400Regular,
   });
-
+  
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
-
+  
   return (
     <>
       <ThemeProvider>
