@@ -1,6 +1,6 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 
-import { loginRequest, registerRequest } from './authentication.service';
+import { checkAuthRequest, loginRequest, logoutResquest, registerRequest } from './authentication.service';
 
 export const AuthenticationContext = createContext();
 
@@ -8,6 +8,18 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        checkAuthRequest()
+        .then((u) => {
+            if(u) {
+                setUser(u);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
+        });
+    });
 
     const onLogin = (email, password) => {
         setIsLoading(true);
@@ -46,6 +58,11 @@ export const AuthenticationContextProvider = ({ children }) => {
         });
     };
 
+    const onLogout = () => {
+        setUser(null);
+        logoutResquest();
+    };
+
     return (
         <AuthenticationContext.Provider
             value={{
@@ -53,7 +70,8 @@ export const AuthenticationContextProvider = ({ children }) => {
                 isLoading,
                 error,
                 onLogin,
-                onRegister
+                onRegister,
+                onLogout
             }}
         >
             {children}
